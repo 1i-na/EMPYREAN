@@ -1,0 +1,29 @@
+body {
+    background-image: url("assets/background.jpg");
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden;
+    margin: 0;
+}
+
+h1 {
+    color: #ffffff;
+    padding: 0;
+    margin: 50px;
+}
+
+.section_frames {
+    width: 200px;
+    height: 530px;
+    margin: 20px;
+}
+
+.section_frames:hover {
+    transform: scale(1.1);
+    transition: transform 0.3s;
+    filter: drop-shadow(0 0 10px #ffffff);
+}
