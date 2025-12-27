@@ -2,8 +2,6 @@
 
 const sectionFrames = document.querySelectorAll(".section_frames");
 
-// CAROUSEL
-
 const frames = document.getElementById("frames");
 const backBtn = document.getElementById("back_button");
 const nextBtn = document.getElementById("next_button");
@@ -15,6 +13,8 @@ sectionFrames.forEach(frame => {
     frame.dataset.monotone = frame.src;
     frame.dataset.color = frame.src.replace("_monotone", "_color");
 });
+
+// CAROUSEL
 
 function updateCarousel(){
     sectionFrames.forEach((frame, index) => {
@@ -44,3 +44,14 @@ nextBtn.addEventListener("click", () => {
 });
 
 updateCarousel();
+
+// FRAMES DEPTH
+sectionFrames.forEach((frame, index) => {
+    frame.classList.remove("active", "near");
+
+    if (index === currentIndex){
+        frame.classList.add("active");
+    } else if (Math.abs(index - currentIndex) === 1){
+        frame.classList.add("near");
+    }
+});
