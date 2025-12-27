@@ -6,14 +6,30 @@ body {
     align-items: center;
     flex-direction: column;
     height: 100vh;
-    overflow: hidden;
-    margin: 0;
+    margin: 10;
+    color: #ffffff;
+}
+
+h3 {
+    padding: 0;
+    margin: 20px;
+    align-self: flex-start;
 }
 
 h1 {
-    color: #ffffff;
     padding: 0;
     margin: 50px;
+}
+
+div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+#frames {
+    display: flex;
+    flex-direction: row;
 }
 
 .section_frames {
@@ -24,6 +40,27 @@ h1 {
 
 .section_frames:hover {
     transform: scale(1.1);
-    transition: transform 0.3s;
+    transition: transform 1s;
     filter: drop-shadow(0 0 10px #ffffff);
+}
+
+button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    margin: 60px;
+    color: #ffffff;
+    font-size: 80px;
+    font-weight: bold;
+}
+
+button:hover {
+    filter: drop-shadow(0 0 5px #ffffff);
+}
+
+p {
+    padding: 0;
+    margin: 10px;
+    font-size: 10px;
+    align-self: flex-start;
 }
