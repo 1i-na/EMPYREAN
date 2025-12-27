@@ -1,55 +1,48 @@
 "use strict";
 
-// sections color change
-const scaleSection = document.getElementById("scale_frame");
-scaleSection.addEventListener("mouseover", function() {
-    scaleSection.src = "assets/sections/scale_color.png";
-});
-scaleSection.addEventListener("mouseout", function() {
-    scaleSection.src = "assets/sections/scale_monotone.png";
+const sectionFrames = document.querySelectorAll(".section_frames");
+
+// SECTION FRAMES COLOR CHANGE
+
+sectionFrames.forEach(frame => {
+    const img = frame.src;
+    const color = img.replace("_monotone", "_color");
+    frame.addEventListener("mouseover", () => frame.src = color);
+    frame.addEventListener("mouseout", () => frame.src = img);
 });
 
 
-const tailSection = document.getElementById("tail_frame");
-tailSection.addEventListener("mouseover", function() {
-    tailSection.src = "assets/sections/tail_color.png";
-});
-tailSection.addEventListener("mouseout", function() {
-    tailSection.src = "assets/sections/tail_monotone.png";
+// CAROUSEL
+
+const frames = document.getElementById("frames");
+const backBtn = document.getElementById("back_button");
+const nextBtn = document.getElementById("next_button");
+
+let currentIndex = 2;
+
+function updateCarousel(){
+    sectionFrames.forEach((frame, index) => {
+        frame.classList.toggle("active", index === currentIndex);
+    });
+
+    const frameWidth = sectionFrames[0].getBoundingClientRect().width + 40;
+    const containerWidth = document.querySelector(".carousel").offsetWidth;
+    const offset = containerWidth / 2 - frameWidth / 2 - currentIndex * frameWidth;
+    frames.style.transform = `translateX(${offset}px)`;
+}
+
+backBtn.addEventListener("click", () => {
+    if (currentIndex > 0){
+        currentIndex --;
+        updateCarousel();
+    }
 });
 
-
-const hornSection = document.getElementById("horn_frame");
-hornSection.addEventListener("mouseover", function() {
-    hornSection.src = "assets/sections/horn_color.png";
-});
-hornSection.addEventListener("mouseout", function() {
-    hornSection.src = "assets/sections/horn_monotone.png";
+nextBtn.addEventListener("click", () => {
+    if (currentIndex < sectionFrames.length - 1){
+        currentIndex++;
+        updateCarousel();
+    }
 });
 
-
-const flameSection = document.getElementById("flame_frame");
-flameSection.addEventListener("mouseover", function() {
-    flameSection.src = "assets/sections/flame_color.png";
-});
-flameSection.addEventListener("mouseout", function() {
-    flameSection.src = "assets/sections/flame_monotone.png";
-});
-
-
-const fangSection = document.getElementById("fang_frame");
-fangSection.addEventListener("mouseover", function() {
-    fangSection.src = "assets/sections/fang_color.png";
-});
-fangSection.addEventListener("mouseout", function() {
-    fangSection.src = "assets/sections/fang_monotone.png";
-});
-
-
-const clawSection = document.getElementById("claw_frame");
-clawSection.addEventListener("mouseover", function() {
-    clawSection.src = "assets/sections/claw_color.png";
-});
-clawSection.addEventListener("mouseout", function() {
-    clawSection.src = "assets/sections/claw_monotone.png";
-});
+updateCarousel();
