@@ -2,16 +2,6 @@
 
 const sectionFrames = document.querySelectorAll(".section_frames");
 
-// SECTION FRAMES COLOR CHANGE
-
-sectionFrames.forEach(frame => {
-    const img = frame.src;
-    const color = img.replace("_monotone", "_color");
-    frame.addEventListener("mouseover", () => frame.src = color);
-    frame.addEventListener("mouseout", () => frame.src = img);
-});
-
-
 // CAROUSEL
 
 const frames = document.getElementById("frames");
@@ -20,9 +10,17 @@ const nextBtn = document.getElementById("next_button");
 
 let currentIndex = 2;
 
+// SECTION FRAMES COLOR CHANGE
+sectionFrames.forEach(frame => {
+    frame.dataset.monotone = frame.src;
+    frame.dataset.color = frame.src.replace("_monotone", "_color");
+});
+
 function updateCarousel(){
     sectionFrames.forEach((frame, index) => {
+        const isActive = index === currentIndex;
         frame.classList.toggle("active", index === currentIndex);
+        frame.src = isActive ? frame.dataset.color : frame.dataset.monotone;
     });
 
     const frameWidth = sectionFrames[0].getBoundingClientRect().width + 40;
