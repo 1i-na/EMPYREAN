@@ -45,17 +45,8 @@ h3 {
     overflow: hidden;
     position: relative;
     perspective: 1200px;
+    padding: 20px;
 }
-
-.section_frames.active {
-    animation: float 4s ease-in-out infinite;
-}
-
-@keyframes float {
-    0%, 100% { transform: scale(1.05) translateY(0); }
-    50% { transform: scale(1.05) translateY(-8px); }
-}
-
 
 #frames {
     display: flex;
@@ -64,37 +55,45 @@ h3 {
     transform-style: preserve-3d;
 }
 
+.frame {
+    transition: transform 0.8s ease, opacity 0.8s ease;
+    transform-style: preserve-3d;
+}
+
 .section_frames {
     margin: 0 20px;
     width: 200px;
     height: 530px;
-    opacity: 0.6;
-    transform: scale(0.85) translateZ(-200px);
-    transition:
-        transform 0.8s ease,
-        opacity 0.8s ease,
-        filter 0.8s ease;
+    transition: filter 0.8s ease;
     margin: 0;
-    filter: grayscale(100%) brightness(0.4);
+    filter: none;
+    pointer-events: none;
 }
 
-.section_frames.active {
-    opacity: 1;
+.frame.far {
+    transform: scale(0.8) translateZ(-300px);
+    filter: grayscale(100%) brightness(0.3);
+    opacity: 0.7;
+}
+
+.frame.near {
+    transform: scale(0.9) translateZ(-150px);
+    opacity: 0.7;
+    filter: saturate(0.85) brightness(0.9);
+}
+
+.frame.active {
     transform: scale(1.05) translateZ(0);
     filter: none;
+    opacity: 1;
+    pointer-events: auto;
     z-index: 10;
+    animation: float 4s ease-in-out infinite;
 }
 
-.section_frames.active:hover {
-    transform: scale(1.1);
-    transition: transform 1s;
-    filter: drop-shadow(0 0 10px #ffffff);
-}
-
-.section_frames.near {
-    transform: scale(0.95) translateZ(-100px);
-    filter: greyscale(60%) brightness(0.6);
-    opacity: 0.8;
+@keyframes float {
+    0%, 100% { transform: scale(1.05) translateY(0); }
+    50% { transform: scale(1.05) translateY(-8px); }
 }
 
 button {
@@ -105,6 +104,9 @@ button {
     color: #ffffff;
     font-size: 80px;
     font-weight: bold;
+    position: relative;
+    z-index: 100;
+    pointer-events: auto;
 }
 
 button:hover {
