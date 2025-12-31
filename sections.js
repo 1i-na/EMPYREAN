@@ -5,7 +5,7 @@ const frames = document.getElementById("frames");
 const backBtn = document.getElementById("back_button");
 const nextBtn = document.getElementById("next_button");
 
-// SECTION FRAMES COLOR CHANGE
+// SECTION FRAMES COLORS
 sectionFrames.forEach(frame => {
     frame.dataset.monotone = frame.src;
     frame.dataset.color = frame.src.replace("_monotone", "_color");
@@ -58,12 +58,18 @@ function updateActiveFrame() {
     // ACTIVE (front-facing)
     const active = depthList[0];
     active.wrapper.classList.add("active");
-    active.wrapper.querySelector("img").src = active.wrapper.querySelector("img").dataset.color;
+
+    //monotone -> color on hover
+    active.wrapper.addEventListener("mouseover", () => {
+        active.wrapper.querySelector("img").src = active.wrapper.querySelector("img").dataset.color;
+    });
+    active.wrapper.addEventListener("mouseout", () => {
+        active.wrapper.querySelector("img").src = active.wrapper.querySelector("img").dataset.monotone;
+    });
 
     // NEAR (left & right)
     depthList.slice(1, 3).forEach(item => {
         item.wrapper.classList.add("near");
-        item.wrapper.querySelector("img").src = item.wrapper.querySelector("img").dataset.color;
     });
 
     // FAR (everything else)
