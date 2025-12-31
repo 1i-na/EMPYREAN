@@ -1,12 +1,9 @@
 "use strict";
 
 const sectionFrames = document.querySelectorAll(".section_frames");
-
 const frames = document.getElementById("frames");
 const backBtn = document.getElementById("back_button");
 const nextBtn = document.getElementById("next_button");
-
-let currentIndex = 2;
 
 // SECTION FRAMES COLOR CHANGE
 sectionFrames.forEach(frame => {
@@ -21,47 +18,82 @@ sectionFrames.forEach(frame => {
 });
 
 // CAROUSEL
-function updateCarousel(){
-    sectionFrames.forEach((frame, index) => {
-        const wrapper = frame.parentElement;
-        wrapper.classList.remove("active", "near", "far");
+const frameWrappers = document.querySelectorAll(".frame");
+const total = frameWrappers.length;
+const step = 360 / total;
+const radius = 350;
+const radiusX = 500;
+const radiusY = 250;
 
-        const distance = Math.abs(index - currentIndex);
+let angle = 0;
 
-        if (distance === 0) {
-            wrapper.classList.add("active");
-        } else if (distance === 1) {
-            wrapper.classList.add("near");
-        } else {
-            wrapper.classList.add("far");
-        }
+// 3D FRAME POSITIONING
+frameWrappers.forEach((wrapper, index) => {
+    const radians = (index * step - 90) * (Math.PI / 180);
+    const x = radiusX * Math.cos(radians);
+    const z = radiusY * Math.sin(radians);
 
-        //only active and near frames are in color
-        frame.src = distance <= 1
-            ? frame.dataset.color
-            : frame.dataset.monotone;
+    wrapper.style.transform = `translate3d(${x}px, 0, ${z}px) rotateY(0deg)`;
+});
+
+// ACTIVE FRAME HANDLING
+function updateActiveFrame() {
+    // Build depth list (convert NodeList → Array)
+    const depthList = Array.from(frameWrappers).map((wrapper, i) => {
+        const radians = (i * step - 90 + angle) * (Math.PI / 180);
+        const z = radiusY * Math.sin(radians);
+        return { wrapper, z };
     });
 
-    const frameWidth = sectionFrames[0].getBoundingClientRect().width + 40;
-    const containerWidth = document.querySelector(".carousel").offsetWidth;
-    const offset = containerWidth / 2 - frameWidth / 2 - currentIndex * frameWidth;
+    // Sort by Z depth (closest to camera first)
+    depthList.sort((a, b) => b.z - a.z);
 
-    frames.style.transform = `translateX(${offset}px)`;
+    // Reset all frames
+    frameWrappers.forEach(wrapper => {
+        wrapper.classList.remove("active", "near", "far");
+        const img = wrapper.querySelector("img");
+        img.src = img.dataset.monotone;
+    });
+
+    // ACTIVE (front-facing)
+    const active = depthList[0];
+    active.wrapper.classList.add("active");
+    active.wrapper.querySelector("img").src = active.wrapper.querySelector("img").dataset.color;
+
+    // NEAR (left & right)
+    depthList.slice(1, 3).forEach(item => {
+        item.wrapper.classList.add("near");
+        item.wrapper.querySelector("img").src = item.wrapper.querySelector("img").dataset.color;
+    });
+
+    // FAR (everything else)
+    depthList.slice(3).forEach(item => {
+        item.wrapper.classList.add("far");
+    });
 }
+
+updateActiveFrame();
 
 // BUTTONS
 backBtn.addEventListener("click", () => {
-    if (currentIndex > 0){
-        currentIndex --;
-        updateCarousel();
-    }
+    angle -= step;
+    updateFramePositions();
+    updateActiveFrame();
 });
 
 nextBtn.addEventListener("click", () => {
-    if (currentIndex < sectionFrames.length - 1){
-        currentIndex++;
-        updateCarousel();
-    }
+    angle += step;
+    updateFramePositions();
+    updateActiveFrame();
 });
 
-updateCarousel();
+// UPDATE FRAME POSITIONS
+function updateFramePositions() {
+    frameWrappers.forEach((wrapper, index) => {
+        const radians = (index * step - 90 + angle) * (Math.PI / 180);
+        const x = radiusX * Math.cos(radians);
+        const z = radiusY * Math.sin(radians);
+        
+        wrapper.style.transform = `translate3d(${x}px, 0, ${z}px) rotateY(0deg)`;
+    });
+}
