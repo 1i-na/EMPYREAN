@@ -8,18 +8,11 @@ body {
     height: 100vh;
     margin: 10px;
     color: #ffffff;
+    margin: 0;
 }
 
-#vignette {
-    position: relative;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-}
-
-#vignette::after {
+/* vignette */
+body::after {
     content: "";
     position: absolute;
     inset: 0;
@@ -27,6 +20,7 @@ body {
     pointer-events: none;
 }
 
+/* "EMPYREAN" subtitle */
 h3 {
     padding: 0;
     margin: 20px;
@@ -35,16 +29,22 @@ h3 {
     z-index: 10;
 }
 
+/* "SECTIONS" title */
+h1 {
+    margin: 0;
+}
+
 #title {
     display: flex;
     justify-content: center;
     width: 100%;
     padding: 0;
-    margin: 50px;
+    margin: 25px;
     position: relative;
     z-index: 10;
 }
 
+/* carousel */
 #container {
     display: flex;
     flex-direction: row;
@@ -64,6 +64,7 @@ h3 {
     perspective: 1500px;
 }
 
+/* frames */
 #frames {
     width: 200px;
     height: 530px;
@@ -100,8 +101,8 @@ h3 {
 }
 
 .frame.far {
-    filter: grayscale(100%) brightness(0.3);
-    opacity: 0.6;
+    filter: grayscale(100%) brightness(0.7);
+    opacity: 0.7;
 }
 
 .frame.near {
@@ -116,6 +117,15 @@ h3 {
 .frame.active img {
     filter: none !important;
     animation: float 4s ease-in-out infinite;
+}
+
+/* enable pointer events for active frame only to allow hover */
+.frame.active .section_frames {
+    pointer-events: auto;
+}
+
+.frame.active:hover {
+    filter: drop-shadow(0 0 10px #ffffff);
 }
 
 @keyframes float {
@@ -145,6 +155,7 @@ button:active {
     transform: scale(0.95);
 }
 
+/* copyright text */
 p {
     padding: 0;
     margin: 10px;
