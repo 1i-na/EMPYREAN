@@ -27,6 +27,20 @@ const radiusY = 250;
 
 let angle = 0;
 
+// COLORED FRAMED ON HOVER
+frameWrappers.forEach(wrapper => {
+    wrapper.addEventListener("mouseover", () => {
+        if (wrapper.classList.contains("active")) {
+            wrapper.querySelector("img").src = wrapper.querySelector("img").dataset.color;
+        }
+    });
+    wrapper.addEventListener("mouseout", () => {
+        if (wrapper.classList.contains("active")) {
+            wrapper.querySelector("img").src = wrapper.querySelector("img").dataset.monotone;
+        }
+    });
+});
+
 // 3D FRAME POSITIONING
 frameWrappers.forEach((wrapper, index) => {
     const radians = (index * step - 90) * (Math.PI / 180);
@@ -56,16 +70,7 @@ function updateActiveFrame() {
     });
 
     // ACTIVE (front-facing)
-    const active = depthList[0];
-    active.wrapper.classList.add("active");
-
-    //monotone -> color on hover
-    active.wrapper.addEventListener("mouseover", () => {
-        active.wrapper.querySelector("img").src = active.wrapper.querySelector("img").dataset.color;
-    });
-    active.wrapper.addEventListener("mouseout", () => {
-        active.wrapper.querySelector("img").src = active.wrapper.querySelector("img").dataset.monotone;
-    });
+    depthList[0].wrapper.classList.add("active");
 
     // NEAR (left & right)
     depthList.slice(1, 3).forEach(item => {
