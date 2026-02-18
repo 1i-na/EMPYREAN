@@ -1,0 +1,49 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-size: cover;
+    margin: 0;
+    height: 100vh;
+}
+
+/* both titles */
+#titles {
+    flex: 1; /* takes all available space */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* vertical center */
+    align-items: center;     /* horizontal center */
+    text-align: center;
+}
+
+/* vignette */
+body::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle, transparent 40%, rgba(0,0,0,0.7));
+    pointer-events: none;
+}
+
+/* "EMPYREAN" subtitle */
+h1 {
+    font-size: 5rem;
+    margin: 0;
+}
+
+/* "Glory to the EMPyrean." subtitle */
+h3 {
+    font-size: 2rem;
+    margin-bottom: 0;
+}
+
+/* copyright text */
+p {
+    padding: 0;
+    margin-bottom: 20px;
+    font-size: 10px;
+    position: relative;
+    z-index: 10;
+}
