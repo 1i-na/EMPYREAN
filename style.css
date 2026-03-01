@@ -6,7 +6,7 @@ body {
     background-size: cover;
     margin: 0;
     height: 100vh;
-    background-image: url("../assets/dark_cathedral.png");
+    background-image: url("./assets/dark_cathedral.png");
 }
 
 /* vignette */
