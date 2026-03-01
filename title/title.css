@@ -6,16 +6,7 @@ body {
     background-size: cover;
     margin: 0;
     height: 100vh;
-}
-
-/* both titles */
-#titles {
-    flex: 1; /* takes all available space */
-    display: flex;
-    flex-direction: column;
-    justify-content: center; /* vertical center */
-    align-items: center;     /* horizontal center */
-    text-align: center;
+    background-image: url("../assets/dark_cathedral.png");
 }
 
 /* vignette */
@@ -25,6 +16,30 @@ body::after {
     inset: 0;
     background: radial-gradient(circle, transparent 40%, rgba(0,0,0,0.7));
     pointer-events: none;
+}
+
+/* both titles */
+#titles {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* vertical center */
+    align-items: center;     /* horizontal center */
+    text-align: center;
+    color: #eaeaea;
+    /* transition for smooth scaling */
+    position: relative;
+    overflow: hidden;
+    transition: transform 1s ease;
+    filter: drop-shadow(0 0 10px transparent);
+    transition: filter 0.5s ease-in-out;
+}
+
+/* titles shrink effect on hover */
+#titles:hover {
+    transform: scale(0.85);
+    transition: transform 1s ease;
+    cursor: pointer;
+    filter: drop-shadow(0 0 10px #ffffff);
 }
 
 /* "EMPYREAN" subtitle */
@@ -46,4 +61,25 @@ p {
     font-size: 10px;
     position: relative;
     z-index: 10;
+    position: fixed;
+    bottom: 0;
+}
+
+/* floating animation for titles */
+#float {
+    animation: float 5s ease-in-out infinite;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
 }
