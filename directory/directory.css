@@ -9,6 +9,7 @@ body {
     height: 100vh;
 }
 
+/* news scroller */
 #news-wrapper {
     border: ridge 5px #544a3a;
     padding: 5px;
@@ -34,7 +35,34 @@ body {
     padding-right: 2px; /* spacing between spans */
 }
 
-/* text scroll loop animation */
+/* gallery conveyor belt */
+#gallery {
+    overflow: hidden;
+    width: 50%;
+    display: flex;
+    border: ridge 5px #544a3a;
+    padding: 20px;
+    background: #cbaa5e;
+    color: #363128;
+}
+
+.artworks {
+    display: flex;
+    flex-shrink: 0;
+    min-width: 50%;
+    gap: 30px;
+    padding-right: 30px;
+    animation: scroll-loop 40s linear infinite;
+}
+
+.artworks img {
+    height: 200px;
+    width: auto;
+    object-fit: cover;
+    border: dashed 3px white;
+}
+
+/* scroll loop animation */
 @keyframes scroll-loop {
     0% {
         transform: translateX(0%);
@@ -45,6 +73,6 @@ body {
 }
 
 /* pause animation on hover */
-#news-wrapper:hover .news-content {
+#news-wrapper:hover .news-content, #gallery:hover .artworks {
     animation-play-state: paused;
 }
