@@ -24,7 +24,7 @@ def signup():
         # all fields must be filled
         if not username or not password or not section:
             return render_template('signup.html', 
-                error="Please fil in all the fields.")
+                error="Please fill in all the fields.")
 
         # hash passwords before saving to db
         hashed_pass = generate_password_hash(password)
