@@ -61,23 +61,10 @@ def get_users():
 def get_user(username, section):
     global conn
 
-    users = conn.execute('''
+    user = conn.execute('''
         SELECT * FROM users
         WHERE username = ? AND section = ?
     ''', (username, section)).fetchone()
 
     conn.close()
     return user
-
-# dummy user
-try:
-    get_conn().execute('''
-        INSERT INTO users VALUES (
-        1, 'nana', 'nanapass', 'heart', 'nana', 0, 0, 0
-        )
-    ''')
-    get_conn().commit()
-except:
-    get_conn().rollback()
-
-get_conn().close()
