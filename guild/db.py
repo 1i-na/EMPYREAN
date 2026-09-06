@@ -25,7 +25,7 @@ conn.commit()
 conn.close()
 
 # create user
-def create_user(username, password, section, rank):
+def create_user(username, password, section):
     global conn
     try:
         conn.execute('''
@@ -35,7 +35,7 @@ def create_user(username, password, section, rank):
                 bounties_completed, bounties_requested
             ) VALUES (?, ?, ?, ?, ?, ?, ?)
         ''', (
-            username, password, section, rank, 0, 0, 0
+            username, password, section, 'Rat', 0, 0, 0
         ))
 
         conn.commit()
