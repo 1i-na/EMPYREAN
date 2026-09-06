@@ -1,34 +1,62 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Leaderboard</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='leaderboard.css') }}">
 </head>
 
 <body>
 
-    <h1>Leaderboard</h1>
+    <div class="leaderboard-container">
 
-    <table>
-        <tr>
-            <th>Rank</th>
-            <th>Username</th>
-            <th>Section</th>
-            <th>Points</th>
-            <th>Bounties Completed</th>
-            <th>Bounties Requested</th>
-        </tr>
+        <header>
+            <h1>Leaderboard</h1>
+            <p>Welcome, {{ session["username"] }}!</p>
+            <a href="{{ url_for('logout') }}">Log Out</a>
+        </header>
 
-        {% for user in users %}
-        <tr>
-            <td>{{ user[1] }}</td>
-            <td>{{ user[3] }}</td>
-            <td>{{ user[5] }}</td>
-            <td>{{ user[6] }}</td>
-            <td>{{ user[7] }}</td>
-        </tr>
-        {% endfor %}
+        <table>
 
-    </table>
+            <thead>
+                <tr>
+                    <th>Rank</th>
+                    <th>Name</th>
+                    <th>Section</th>
+                    <th>Points</th>
+                    <th>Bounties Completed</th>
+                    <th>Bounties Requested</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for user in users %}
+                <tr>
+                    <td>
+                        {{ user[1] }}
+                    </td>
+                    <td>
+                        {{ user[3] }}
+                    </td>
+                    <td>
+                        {{ user[5] }}
+                    </td>
+                    <td>
+                        {{ user[6] }}
+                    </td><td>
+                        {{ user[7] }}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+            
+        </table>
+
+    </div>
 
 </body>
 </html>
