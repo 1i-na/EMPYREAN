@@ -13,7 +13,3 @@ class User:
 
     def __str__(self):
         return f"{self.username}#{self.rank}"
-
-if __name__ == "__main__":
-    user = User(1, "nana", "nanapass", "heart", "nana", 0, 0, 0)
-    print(user)

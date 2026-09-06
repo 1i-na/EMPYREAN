@@ -1,30 +1,43 @@
 import sqlite3
 
-conn = sqlite3.connect('rg.db')
+def get_conn():
+    return sqlite3.connect('rg.db')
+
+def get_users():
+    conn = get_conn()
+
+    users = conn.execute('''
+        SELECT * FROM users
+        ORDER BY total_points DESC  
+    ''').fetchall()
+
+    conn.close()
+    return users
 
 # users table
-conn.execute('''
+get_conn().execute('''
     CREATE TABLE IF NOT EXISTS users (
-        user_id INTEGER PRIMARY KEY,
-        username VARCHAR(255) UNIQUE NOT NULL,
-        password VARCHAR(255) NOT NULL,
+        user_id INTEGER PRIMARY KEY AUTOINCREMENT,
+        username VARCHAR(255) NOT NULL,
+        password TEXT NOT NULL,
         section VARCHAR(255) NOT NULL,
         rank VARCHAR(255) NOT NULL,
         total_points INT NOT NULL,
         bounties_completed INT NOT NULL,
-        bounties_requested INT NOT NULL
+        bounties_requested INT NOT NULL,
+        CONSTRAINT unique_rider UNIQUE (username, section)
     )
 ''')
 
 # dummy user
 try:
-    conn.execute('''
+    get_conn().execute('''
         INSERT INTO users VALUES (
         1, 'nana', 'nanapass', 'heart', 'nana', 0, 0, 0
         )
     ''')
-    conn.commit()
+    get_conn().commit()
 except:
-    conn.rollback()
+    get_conn().rollback()
 
-conn.close()
+get_conn().close()

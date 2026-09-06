@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Leaderboard</title>
+</head>
+
+<body>
+
+    <h1>Leaderboard</h1>
+
+    <table>
+        <tr>
+            <th>Rank</th>
+            <th>Username</th>
+            <th>Section</th>
+            <th>Points</th>
+            <th>Bounties Completed</th>
+            <th>Bounties Requested</th>
+        </tr>
+
+        {% for user in users %}
+        <tr>
+            <td>{{ user[1] }}</td>
+            <td>{{ user[3] }}</td>
+            <td>{{ user[5] }}</td>
+            <td>{{ user[6] }}</td>
+            <td>{{ user[7] }}</td>
+        </tr>
+        {% endfor %}
+
+    </table>
+
+</body>
+</html>
