@@ -1,0 +1,14 @@
+user_id,username,nickname,password,verified,rider,section,total_points,bounties_completed,bounties_requested
+1,kidpadl,nana,nana333,true,true,heart,373737,7,3
+2,kidpaddle,coolernana,nana777,true,true,heart,737373,3,7
+3,kid,coolestnana,77737,true,true,heart,333333,7,7
+4,realnana,hachi,nana888,true,false,,888777,8,8
+5,someuser,seven,pass77,true,false,,777777,7,7
+6,random,sixsevennn,hahafunnynot,true,false,,676767,6,7
+7,idkanymore,seventeenthirtyeightaye,nostalgic1738,false,false,,3,1,1
+8,iwanttosleep,heywassuphello,1738nostalgic,false,false,,1738,17,38
+9,kkies,kikidoyouloveme,22myword,true,true,scale,0,0,0
+10,omegaluvr123,helpme,ioneenlikdat,true,false,,0,0,0
+11,puppyboysarebetter,imtired,somepa55,false,false,,1,1,1
+12,cypherreismt,cypherwasnothere,cypherpass,true,true,scale,123456,654,321
+13,smddd,okthatsenoughusers,imdone4,true,false,,1,2,3
