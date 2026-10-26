@@ -2,11 +2,11 @@ import { useState } from 'react';
 import './SignUp.css';
 
 export default function Login({onSuccess}) {
-  const [message, setMessage] = useState("");
+  const [message, setMessage] = useState('');
 
   async function handleSubmit(e) {
     e.preventDefault();
-    setMessage("");
+    setMessage('');
 
     const form = new FormData(e.currentTarget);
 
@@ -30,7 +30,6 @@ export default function Login({onSuccess}) {
       onSuccess(result.user);
     } catch (error) {
       setMessage('Unable to log in. Verify your credentials.');
-      console.error(error);
     }
   }
 

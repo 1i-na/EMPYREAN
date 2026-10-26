@@ -42,7 +42,6 @@ export default function SignUp({onSuccess}){
       onSuccess(meResult.user);
     } catch (error){
       setMessage('Username already exists.');
-      console.error(error);
     }
   }
 
