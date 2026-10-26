@@ -2,8 +2,9 @@ import { useState, useEffect } from 'react'
 import './App.css'
 import NavBar from './components/NavBar';
 import OATLeaderboard from './components/OATLeaderboard/OATLeaderboard';
+import SignUp from './components/SignUp/SignUp.jsx';
 
-function App() {
+export default function App() {
   const [users, setUsers] = useState([]);
   const [error, setError] = useState("");
 
@@ -59,15 +60,14 @@ function App() {
 
   return (
     <>
-      <NavBar />
+      {/* <NavBar />
 
       <OATLeaderboard 
         users={users}
         sortedUsers={sortedUsers}
         error={error}
-      />
+      /> */}
+      <SignUp />
     </>
   );
 }
-
-export default App
