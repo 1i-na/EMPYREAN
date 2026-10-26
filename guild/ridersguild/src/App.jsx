@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import './App.css'
 import NavBar from './components/NavBar';
 import OATLeaderboard from './components/OATLeaderboard/OATLeaderboard';
-import SignUp from './components/SignUp/SignUp.jsx';
+import SignUpPage from './components/SignUp/SignUpPage';
 
 export default function App() {
   const [users, setUsers] = useState([]);
@@ -67,7 +67,7 @@ export default function App() {
         sortedUsers={sortedUsers}
         error={error}
       /> */}
-      <SignUp />
+      <SignUpPage />
     </>
   );
 }

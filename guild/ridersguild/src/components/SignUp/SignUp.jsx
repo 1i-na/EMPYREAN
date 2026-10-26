@@ -38,6 +38,7 @@ export default function SignUp(){
       setIsRider(false);
     } catch (error){
       setMessage('Unable to create an account. Please try again.');
+      console.error(error);
     }
   }
 
@@ -45,34 +46,34 @@ export default function SignUp(){
     <form className='signup-form' onSubmit={handleSubmit}>
       <label>
         Discord username:
-        <input name="username" required maxLength={80} />
+        <input name='username' required maxLength={80} />
       </label>
 
       <label>
         Nickname:
-        <input name="nickname" required maxLength={80} />
+        <input name='nickname' required maxLength={80} />
       </label>
 
       <label>
         Password:
-        <input name="password" type="password" required minLength={12} />
+        <input name='password' type='password' required minLength={12} />
       </label>
 
       <label>
         Are you a rider?
         <select
-          value={isRider ? "yes" : "no"}
-          onChange={(e) => setIsRider(e.target.value === "yes")}
+          value={isRider ? 'yes' : 'no'}
+          onChange={(e) => setIsRider(e.target.value === 'yes')}
         >
-          <option value="no">No</option>
-          <option value="yes">Yes</option>
+          <option value='no'>No</option>
+          <option value='yes'>Yes</option>
         </select>
       </label>
 
       {isRider && (
         <label>
           Section:
-          <select name="section" required>
+          <select name='section' required>
             {sections.map(section => (
               <option key={section} value={section}>{section}</option>
             ))}
@@ -80,8 +81,8 @@ export default function SignUp(){
         </label>
       )}
 
-      <button type="submit">Sign Up</button>
-      <p aria-live="polite">{message}</p>
+      <button type='submit'>Sign Up</button>
+      <p aria-live='polite'>{message}</p>
     </form>
   );
 }
