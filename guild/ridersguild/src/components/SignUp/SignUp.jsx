@@ -32,16 +32,16 @@ export default function SignUp({onSuccess}){
       });
 
       const result = await response.json();
-      if (!response.ok) throw new Error('Signup failed: ', result.Error);
+      if (!response.ok) throw new Error(result.error);
 
       const meResponse = await fetch("/api/me", { credentials: "include" });
       const meResult = await meResponse.json();
       
-      if (!meResponse.ok) throw new Error('Account created, but session check failed: ', meResult.Error);
+      if (!meResponse.ok) throw new Error(meResult.error);
 
       onSuccess(meResult.user);
     } catch (error){
-      setMessage('Username already exists.');
+      setMessage(error.message);
     }
   }
 
@@ -86,7 +86,12 @@ export default function SignUp({onSuccess}){
       )}
 
       <button type='submit'>Sign Up</button>
-      <p aria-live='polite'>{message}</p>
+      <p 
+        className={`form-message ${message ? 'has-message' : ''}`} 
+        aria-live='polite'
+      >
+        {message}
+      </p>
     </form>
   );
 }

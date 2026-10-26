@@ -24,12 +24,12 @@ export default function Login({onSuccess}) {
       const result = await response.json();
 
       if (!response.ok) {
-        throw new Error('Login failed: ', result.Error);
+        throw new Error(result.error);
       }
 
       onSuccess(result.user);
     } catch (error) {
-      setMessage('Unable to log in. Verify your credentials.');
+      setMessage(error.message);
     }
   }
 
@@ -53,7 +53,12 @@ export default function Login({onSuccess}) {
       </label>
 
       <button type='submit'>Log In</button>
-      <p aria-live='polite'>{message}</p>
+      <p 
+        className={`form-message ${message ? 'has-message' : ''}`} 
+        aria-live='polite'
+      >
+        {message}
+      </p>
     </form>
   );
 }

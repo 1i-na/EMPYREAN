@@ -60,9 +60,9 @@
   outline-offset: 3px;
 }
 
-.signup-form p {
+.form-message {
   min-height: 1.4em;
   margin: 0;
-  color: #d9c7eb;
+  color: #ff9b9b;
   text-align: center;
 }
