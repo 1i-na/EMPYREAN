@@ -56,7 +56,7 @@ export default function SignUp(){
 
       <label>
         Password:
-        <input name='password' type='password' required minLength={12} />
+        <input name='password' type='password' required minLength={7} />
       </label>
 
       <label>

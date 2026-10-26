@@ -1,0 +1,27 @@
+#!/usr/bin/env node
+import app from '../server.js';
+const port = process.env.PORT || 3000;
+
+async function startServer(){
+	try {
+    // create server
+		const server = app.listen(port, () => 
+			console.debug(`Server started on port ${port}`)
+		);
+
+		// graceful shutdown
+		async function shutdown() {
+			console.log('Shutdown signal received, closing HTTP server.');
+			server.close(() => {
+				console.log('HTTP server closed');
+			});
+		}
+
+		process.on('SIGINT', shutdown);
+		process.on('SIGTERM', shutdown);
+	} catch (err) {
+		console.error('Unable to start server: ', err);
+	}
+}
+
+startServer();
