@@ -1,8 +1,13 @@
 {
-  "type": "module",
+  "name": "EMPYREAN",
+  "version": "1.0.0",
+  "main": "index.js",
   "scripts": {
-    "dev": "node --watch ./bin/www"
+    "start": "node ./server/bin/www",
+    "dev": "node --watch ./server/bin/www",
+    "build": "cd ridersguild && npm install && npm run build && cd ../server && npm install"
   },
+  "authors": "NANA @1i-na",
   "dependencies": {
     "bcryptjs": "^3.0.3",
     "better-sqlite3": "^13.0.3",

@@ -1,4 +1,5 @@
 import express from "express";
+import path from 'node:path';
 import Database from "better-sqlite3";
 import bcrypt from "bcryptjs";
 import session from "express-session";
@@ -181,6 +182,13 @@ app.post("/api/logout", (req, res) => {
     res.clearCookie("connect.sid");
     res.json({ message: "Logged out." });
   });
+});
+
+// server react app
+app.use(express.static(path.resolve('../ridersguild/dist')));
+
+app.use((req, res) => {
+  res.status(404).json({message: 'Page not found'});
 });
 
 export default app;

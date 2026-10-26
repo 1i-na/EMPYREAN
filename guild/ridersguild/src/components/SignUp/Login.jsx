@@ -1,26 +1,24 @@
 import { useState } from 'react';
 import './SignUp.css';
 
-export default function Login() {
+export default function Login({onSuccess}) {
   const [message, setMessage] = useState("");
 
   async function handleSubmit(e) {
     e.preventDefault();
     setMessage("");
 
-    const formElement = e.currentTarget;
-    const form = new FormData(formElement);
-
-    const credentials = {
-      username: form.get('username').trim(),
-      password: form.get('password'),
-    };
+    const form = new FormData(e.currentTarget);
 
     try {
       const response = await fetch('/api/login', {
         method: 'POST',
+        credentials: 'include',
         headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify(credentials),
+        body: JSON.stringify({
+          username: form.get('username').trim(),
+          password: form.get('password')
+        })
       });
 
       const result = await response.json();
@@ -29,10 +27,9 @@ export default function Login() {
         throw new Error('Login failed: ', result.Error);
       }
 
-      setMessage('Logged in successfully. Welcome back, rider.');
-      formElement.reset();
+      onSuccess(result.user);
     } catch (error) {
-      setMessage('Unable to log in. Please try again.');
+      setMessage('Unable to log in. Verify your credentials.');
       console.error(error);
     }
   }
