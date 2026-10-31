@@ -1,9 +1,9 @@
 import express from "express";
+import session from "express-session";
+import { rateLimit } from "express-rate-limit";
 import path from 'node:path';
 import Database from "better-sqlite3";
 import bcrypt from "bcryptjs";
-import session from "express-session";
-import { rateLimit } from "express-rate-limit";
 
 const app = express();
 const db = new Database("guild.sqlite");
@@ -70,6 +70,7 @@ function returnedUser(row) {
   };
 }
 
+// signup/create new user account
 app.post("/api/signup", authLimiter, async (req, res) => {
   const { username, nickname, password, isRider, section } = req.body ?? {};
   
@@ -137,6 +138,7 @@ app.post("/api/signup", authLimiter, async (req, res) => {
   }
 });
 
+// login
 app.post("/api/login", authLimiter, async (req, res) => {
   const { username, password } = req.body ?? {};
 
@@ -184,8 +186,8 @@ app.post("/api/logout", (req, res) => {
   });
 });
 
-// server react app
-app.use(express.static(path.resolve('../ridersguild/dist')));
+// serve react app
+app.use(express.static(path.resolve(import.meta.dirname, '../ridersguild/dist')));
 
 app.use((req, res) => {
   res.status(404).json({message: 'Page not found'});

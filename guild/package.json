@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node ./server/bin/www",
     "dev": "node --watch ./server/bin/www",
-    "build": "cd ridersguild && npm install && npm run build && cd ../server && npm install"
+    "build": "cd ridersguild && npm install && npm run build && cd ../server && npm install",
+    "export": "node ./server/export-users-stats.js"
   },
   "author": "NANA @1i-na",
   "dependencies": {

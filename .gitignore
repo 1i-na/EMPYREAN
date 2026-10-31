@@ -1,3 +1,4 @@
 guild/data/*.txt
 guild/ridersguild/public/*.txt
 **/node_modules
+.env
