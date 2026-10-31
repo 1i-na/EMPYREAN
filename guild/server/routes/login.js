@@ -1,25 +1,9 @@
 import { Router } from "express";
 import bcrypt from "bcryptjs";
 import { db } from "../db/db.js";
-import { authLimiter } from "./auth-limiter.js";
+import { authLimiter, returnedUser } from "../utils/auth-utils.js";
 
 const router = Router();
-
-// return a user from db
-function returnedUser(row) {
-  return {
-    user_id: row.user_id,
-    username: row.username,
-    nickname: row.nickname,
-    verified: Boolean(row.verified),
-    rider: Boolean(row.rider),
-    section: row.section,
-    rank_title: row.rank_title,
-    total_points: row.total_points,
-    bounties_completed: row.bounties_completed,
-    bounties_requested: row.bounties_requested
-  };
-}
 
 // login
 router.post("/", authLimiter, async (req, res) => {

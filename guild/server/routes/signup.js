@@ -1,7 +1,8 @@
 import { Router } from "express";
 import bcrypt from "bcryptjs";
 import { db, sections } from "../db/db.js";
-import { authLimiter } from "./auth-limiter.js";
+import { authLimiter } from "../utils/auth-utils.js";
+import { isValidUsername, isValidPassword } from "../utils/validation.js";
 
 const router = Router();
 
@@ -18,31 +19,43 @@ router.post("/", authLimiter, async (req, res) => {
     return res.status(400).json({ error: "Please provide all required fields." });
   }
 
-  const cleanUsername = username.trim();
-  const cleanNickname = nickname.trim();
-
-  if (!cleanUsername || cleanUsername.length > 80 ||
-      !cleanNickname || cleanNickname.length > 80) {
-    return res.status(400).json({ error: "Username or nickname is invalid." });
+  const validUsername = isValidUsername(username);
+  const validNickname = nickname.trim();
+  
+  // validate username
+  if (!validUsername) {
+    return res.status(400).json({
+      error: "Enter a valid Discord username."
+    });
   }
 
-  if (password.length < 7 || password.length > 200) {
-    return res.status(400).json({ error: "Password must be at least 7 characters." });
+  // validate nickname
+  if (!validNickname || validNickname.length > 80) {
+    return res.status(400).json({ error: "Nickname is invalid." });
   }
 
-  const cleanSection = isRider ? section : null;
+  // validate password
+  if (!isValidPassword(password)) {
+    return res.status(400).json({ 
+      error: "Password must be at least 7 characters and contain no whitespace." 
+    });
+  }
 
-  if (isRider && !sections.has(cleanSection)) {
+  // validate section
+  const validSection = isRider ? section : null;
+
+  if (isRider && !sections.has(validSection)) {
     return res.status(400).json({ error: "Choose a valid rider section." });
   }
 
+  // hash password
   try {
     const passwordHash = await bcrypt.hash(password, 7);
 
     const result = db.prepare(`
       INSERT INTO users (username, nickname, password_hash, rider, section)
       VALUES (?, ?, ?, ?, ?)
-    `).run(cleanUsername, cleanNickname, passwordHash, isRider ? 1 : 0, cleanSection);
+    `).run(validUsername, validNickname, passwordHash, isRider ? 1 : 0, validSection);
 
     const userId = Number(result.lastInsertRowid);
 
