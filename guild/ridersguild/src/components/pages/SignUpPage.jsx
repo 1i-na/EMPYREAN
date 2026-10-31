@@ -1,11 +1,10 @@
-import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import SignUp from '../login/SignUp.jsx';
 import Login from '../login/Login.jsx';
 import './SignUpPage.css';
-import { useState, useEffect } from 'react';
 
-export default function SignUpPage({ users, sortedUsers, error }){
-  const [user, setUser] = useState(null);
+export default function SignUpPage({ setUser }){
   const [page, setPage] = useState('login');
   const [checkingSession, setCheckingSession] = useState(true);
   const navigate = useNavigate();
@@ -32,21 +31,10 @@ export default function SignUpPage({ users, sortedUsers, error }){
     checkSession();
   }, []);
 
-  // logout user
-  async function handleLogout() {
-    await fetch("/api/logout", {
-      method: "POST",
-      credentials: "include",
-    });
-
-    setUser(null);
-    setPage("login");
-  }
-
   if (checkingSession) return <p>Checking login...</p>;
 
   return (
-    <main className='auth-page'>
+    <main className='page'>
       <section className="card auth-card">
         <div className='auth-toggle'>
           <button 

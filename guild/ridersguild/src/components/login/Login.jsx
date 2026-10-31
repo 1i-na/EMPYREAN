@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import './SignUp.css';
 
-export default function Login({onSuccess}) {
+export default function Login({ onSuccess }) {
   const [message, setMessage] = useState('');
 
   async function handleSubmit(e) {

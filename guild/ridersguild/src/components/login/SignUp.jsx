@@ -6,7 +6,7 @@ const sections = [
   "Claw", "Gem", "Sol", "Nova", "Luna", "Dawn",
 ];
 
-export default function SignUp({onSuccess}){
+export default function SignUp({ onSuccess }){
   const [isRider, setIsRider] = useState(false);
   const [message, setMessage] = useState('');
 

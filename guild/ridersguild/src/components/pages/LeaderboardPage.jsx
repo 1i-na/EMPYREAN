@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import OATLeaderboard from '../OATLeaderboard/OATLeaderboard';
 
 export default function LeaderboardPage() {
   const [users, setUsers] = useState([]);

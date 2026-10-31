@@ -14,7 +14,7 @@ const app = express();
 
 app.use(express.json());
 
-// setup session cookies
+// setup session
 app.use(
   session({
     secret: process.env.SESSION_SECRET,
