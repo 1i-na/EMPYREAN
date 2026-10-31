@@ -1,48 +1,21 @@
-import { useState, useEffect } from 'react'
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import './App.css'
 import NavBar from './components/NavBar';
-import SignUpPage from './components/SignUp/SignUpPage';
+import LeaderboardPage from "./components/pages/LeaderboardPage";
+import SignUpPage from './components/pages/SignUpPage';
+import AccountPage from "./components/AccountPage";
+import AboutPage from "./components/AboutPage";
 
 export default function App() {
-  const [users, setUsers] = useState([]);
-  const [error, setError] = useState("");
-
-  async function loadUsers() {
-    try {
-      const response = await fetch("/api/leaderboard", {
-        credentials: 'include'
-      });
-
-      const result = await response.json();
-
-      if (!response.ok) {
-        throw new Error(result.error || "Could not load the leaderboard. Please try again.");
-      }
-
-      setUsers(result.users);
-      setError("");
-    } catch (err) {
-      setError(err.message);
-    }
-  }
-
-  useEffect(() => {
-    loadUsers();
-  }, []);
-
-  const sortedUsers = [...users].sort(
-    (a, b) => b.total_points - a.total_points
-  );
-
   return (
-    <>
+    <BrowserRouter>
       <NavBar />
-
-      <SignUpPage 
-        users={users}
-        sortedUsers={sortedUsers}
-        error={error}
-      />
-    </>
+      <Routes>
+        <Route path="/" element={<LeaderboardPage />} />
+        <Route path="/about" element={<AboutPage />} />
+        <Route path="/login" element={<SignUpPage />} />
+        <Route path="/account" element={<AccountPage />} />
+      </Routes>
+    </BrowserRouter>
   );
 }

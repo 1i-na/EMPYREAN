@@ -1,16 +1,17 @@
-import SignUp from './SignUp.jsx';
-import Login from './Login.jsx';
+import { useNavigate } from "react-router-dom";
+import SignUp from '../login/SignUp.jsx';
+import Login from '../login/Login.jsx';
 import './SignUpPage.css';
 import { useState, useEffect } from 'react';
-import OATLeaderboard from "../OATLeaderboard/OATLeaderboard.jsx"
 
 export default function SignUpPage({ users, sortedUsers, error }){
   const [user, setUser] = useState(null);
   const [page, setPage] = useState('login');
   const [checkingSession, setCheckingSession] = useState(true);
+  const navigate = useNavigate();
 
+  // check if user is logged in already
   useEffect(() => {
-    // check if user is logged in already
     async function checkSession(){
       try {
         const response = await fetch('/api/me', {
@@ -31,6 +32,7 @@ export default function SignUpPage({ users, sortedUsers, error }){
     checkSession();
   }, []);
 
+  // logout user
   async function handleLogout() {
     await fetch("/api/logout", {
       method: "POST",
@@ -43,44 +45,30 @@ export default function SignUpPage({ users, sortedUsers, error }){
 
   if (checkingSession) return <p>Checking login...</p>;
 
-  if (user) {
-    return (
-      <>
-        <OATLeaderboard
-          users={users}
-          sortedUsers={sortedUsers}
-          error={error}
-        />
-        <button type="button" onClick={handleLogout}>
-          Log Out
-        </button>
-      </>
-    );
-  }
-
   return (
     <main className='auth-page'>
-      <div className='auth-toggle'>
-        <button 
-          type='button' 
-          className={page === 'login' ? 'active' : ''}
-          onClick={() => setPage('login')}
-        >
-          Log In
-        </button>
-        <button 
-          type='button' 
-          className={page === 'signup' ? 'active' : ''}
-          onClick={() => setPage('signup')}
-        >
-          Sign Up
-        </button>
-      </div>
-
-      {page === 'login' 
-        ? (<Login onSuccess={setUser} />) 
-        : (<SignUp onSuccess={setUser} />)
-      }
+      <section className="card auth-card">
+        <div className='auth-toggle'>
+          <button 
+            type='button' 
+            className={page === 'login' ? 'active' : ''}
+            onClick={() => setPage('login')}
+          >
+            Log In
+          </button>
+          <button 
+            type='button' 
+            className={page === 'signup' ? 'active' : ''}
+            onClick={() => setPage('signup')}
+          >
+            Sign Up
+          </button>
+        </div>
+        {page === 'login' 
+          ? <Login onSuccess={() => navigate("/account")} /> 
+          : <SignUp onSuccess={() => navigate("/account")} />
+        }
+      </section>
     </main>
   );
 }

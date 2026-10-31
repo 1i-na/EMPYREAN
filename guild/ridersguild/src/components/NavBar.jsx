@@ -1,15 +1,14 @@
+import { Link } from "react-router-dom";
+
 export default function NavBar() {
   return (
-    <>
-      <nav>
-        <a href="/" className="logo">Rider's Guild</a>
-
-        <ul>
-            <li><a href="/">Leaderboard</a></li>
-            <li><a href="/about.html">About</a></li>
-            <li><a href="/login.html">Login/Sign Up</a></li>
-        </ul>
-      </nav>
-    </>
+    <nav className="navbar">
+      <Link to="/" className="logo">Rider's Guild</Link>
+      <div className="nav-links">
+        <Link to="/">Leaderboard</Link>
+        <Link to="/about">About</Link>
+        <Link to="/account">Account</Link>
+      </div>
+    </nav>
   );
 }
