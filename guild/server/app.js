@@ -5,6 +5,7 @@ import signupRouter from "./routes/signup.js";
 import loginRouter from "./routes/login.js";
 import meRouter from "./routes/me.js";
 import logoutRouter from "./routes/logout.js";
+import leaderboardRouter from "./routes/leaderboard.js";
 
 const envPath = path.resolve(import.meta.dirname, '.env');
 process.loadEnvFile(envPath);
@@ -33,6 +34,7 @@ app.use("/api/signup", signupRouter);
 app.use("/api/login", loginRouter);
 app.use("/api/me", meRouter);
 app.use("/api/logout", logoutRouter);
+app.use("/api/leaderboard", leaderboardRouter);
 
 // serve react app
 app.use(express.static(path.resolve(import.meta.dirname, '../ridersguild/dist')));

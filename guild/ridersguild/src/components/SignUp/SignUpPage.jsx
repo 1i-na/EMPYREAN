@@ -2,8 +2,9 @@ import SignUp from './SignUp.jsx';
 import Login from './Login.jsx';
 import './SignUpPage.css';
 import { useState, useEffect } from 'react';
+import OATLeaderboard from "../OATLeaderboard/OATLeaderboard.jsx"
 
-export default function SignUpPage(){
+export default function SignUpPage({ users, sortedUsers, error }){
   const [user, setUser] = useState(null);
   const [page, setPage] = useState('login');
   const [checkingSession, setCheckingSession] = useState(true);
@@ -44,14 +45,16 @@ export default function SignUpPage(){
 
   if (user) {
     return (
-      <main className='auth-page'>
-        <section className='signup-form'>
-          <h1>Welcome, {user.nickname}!</h1>
-          <button type='button' onClick={handleLogout}>
-            Log Out
-          </button>
-        </section>
-      </main>
+      <>
+        <OATLeaderboard
+          users={users}
+          sortedUsers={sortedUsers}
+          error={error}
+        />
+        <button type="button" onClick={handleLogout}>
+          Log Out
+        </button>
+      </>
     );
   }
 
