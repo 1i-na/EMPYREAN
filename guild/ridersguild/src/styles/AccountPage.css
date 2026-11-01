@@ -1,0 +1,164 @@
+.account-card {
+  text-align: left;
+}
+
+.account-header {
+  padding-bottom: 1.25rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border);
+  text-align: center;
+}
+
+.account-header h1 {
+  margin: 0.25rem 0 0;
+}
+
+.account-eyebrow {
+  margin: 0;
+  color: var(--gold);
+  font-size: 0.85rem;
+  font-variant: small-caps;
+  letter-spacing: 0.12em;
+}
+
+.account-sections {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.account-actions {
+  grid-column: 1 / -1;
+}
+
+.account-section {
+  padding: 1.25rem;
+  background: rgb(0 0 0 / 12%);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+}
+
+.account-section h2 {
+  margin-bottom: 1rem;
+  color: var(--gold-light);
+  font-size: 1.3rem;
+}
+
+.account-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin: 0;
+}
+
+.account-field {
+  flex: 1 1 180px;
+  min-width: 0;
+  padding: 0.85rem 1rem;
+  background: #19150f;
+  border: 1px solid rgb(146 118 62 / 45%);
+  border-radius: 3px;
+}
+
+.account-field dt {
+  margin-bottom: 0.25rem;
+  color: #bda875;
+  font-size: 0.82rem;
+}
+
+.account-field dd {
+  margin: 0;
+  overflow-wrap: anywhere;
+  color: var(--text-h);
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.account-field--highlight {
+  background: rgb(196 164 90 / 12%);
+  border-color: var(--gold);
+}
+
+.account-field--highlight dd {
+  color: var(--gold-light);
+  font-size: 1.25rem;
+}
+
+.nickname-form label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: var(--text-h);
+  font-weight: 700;
+}
+
+.nickname-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+}
+
+.nickname-controls input {
+  flex: 1 1 200px;
+  min-width: 0;
+  padding: 0.7rem 0.8rem;
+  color: var(--text-h);
+  background: #19150f;
+  border: 1px solid var(--gold-dim);
+  border-radius: 3px;
+  font: inherit;
+}
+
+.nickname-controls button, .logout-button {
+  padding: 0.7rem 1rem;
+  color: #20190e;
+  background: linear-gradient(#ddc477, #ae8c42);
+  border: 1px solid #ead694;
+  border-radius: 3px;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.nickname-controls button:hover, .logout-button:hover {
+  filter: brightness(1.12);
+}
+
+.account-message {
+  min-height: 1.5em;
+  margin: 0.65rem 0;
+  color: var(--gold-light);
+}
+
+.logout-button {
+  color: #f5e9d0;
+  background: linear-gradient(#8f3b2c, #67291f);
+  border-color: #b9654d;
+}
+
+@media (max-width: 520px) {
+  .account-section {
+    padding: 1rem;
+  }
+
+  .account-field {
+    flex-basis: 100%;
+  }
+
+  .nickname-controls {
+    flex-direction: column;
+  }
+
+  .nickname-controls button, .logout-button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 650px) {
+  .account-sections {
+    grid-template-columns: 1fr;
+  }
+
+  .account-actions {
+    grid-column: auto;
+  }
+}

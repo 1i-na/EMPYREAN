@@ -1,5 +1,9 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import Profile from "../account/Profile.jsx";
+import Stats from "../account/Stats.jsx";
+import Settings from "../account/Settings.jsx";
+import "../../styles/AccountPage.css";
 
 export default function AccountPage({ user, setUser }) {
   const [checking, setChecking] = useState(true);
@@ -24,49 +28,6 @@ export default function AccountPage({ user, setUser }) {
       .finally(() => setChecking(false));
   }, []);
 
-  // update nickname
-  async function updateNickname(e) {
-    e.preventDefault();
-    setMessage("");
-
-    try {
-      const response = await fetch("/api/me", {
-        method: "PATCH",
-        credentials: "include",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ nickname }),
-      });
-
-      const result = await response.json();
-      if (!response.ok) throw new Error(result.error || "Could not update nickname.");
-
-      setUser(result.user);
-      setNickname(result.user.nickname);
-      setMessage("Nickname updated.");
-    } catch (err) {
-      setMessage(err.message);
-    }
-  }
-
-  // handle logout
-  async function handleLogout() {
-    try {
-      const response = await fetch("/api/logout", {
-        method: "POST",
-        credentials: "include",
-      });
-
-      if (!response.ok) {
-        throw new Error("Logout failed");
-      }
-
-      navigate("/login", { replace: true });
-    } catch (err) {
-      console.error(err);
-      alert("Could not log out. Please try again.");
-    }
-  }
-
   if (checking) return <main className="page"><p>Checking your account…</p></main>;
 
   if (!user) {
@@ -82,36 +43,24 @@ export default function AccountPage({ user, setUser }) {
   }
 
   return (
-    <main className="page">
-      <section className="card">
-        <h1>{user.nickname}'s account</h1>
-        <p><strong>Username:</strong> {user.username}</p>
-        <p><strong>Rider:</strong> {user.rider ? "Yes" : "No"}</p>
+    <main className="page account-page">
+      <section className="card account-card">
+        <header className="account-header">
+          <p className="account-eyebrow">Rider's record</p>
+          <h1>{user.nickname}'s account</h1>
+        </header>
 
-        {user.rider && <p><strong>Section:</strong> {user.section}</p>}
-        
-        <p><strong>Rank:</strong> {user.rank_title || "Unranked"}</p>
-        <p><strong>Bounties requested:</strong> {user.bounties_requested}</p>
-        <p><strong>Bounties completed:</strong> {user.bounties_completed}</p>
-        <p><strong>Total points:</strong> {user.total_points}</p>
-
-        <form onSubmit={updateNickname}>
-          <label htmlFor="nickname">Nickname</label>
-          <input
-            id="nickname"
-            value={nickname}
-            onChange={event => setNickname(event.target.value)}
-            maxLength={80}
-            required
+        <div className="account-sections">
+          <Profile user={user} />
+          <Stats user={user} />
+          <Settings 
+            nickname={nickname} 
+            setNickname={setNickname} 
+            message={message} 
+            setMessage={setMessage} 
+            setUser={setUser} 
           />
-          <button type="submit">Update nickname</button>
-        </form>
-
-        <p aria-live="polite">{message}</p>
-
-        <button type="button" onClick={handleLogout}>
-          Log out
-        </button>
+        </div>
       </section>
     </main>
   );
