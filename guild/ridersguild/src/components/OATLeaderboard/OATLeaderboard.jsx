@@ -1,11 +1,12 @@
 import LeaderboardHeader from "./LeaderboardHeader";
 import LeaderboardTable from "./LeaderboardTable";
+import "../../styles/Leaderboard.css";
 
 export default function OATLeaderboard({ users, sortedUsers, error }) {
   return (
     <>
-      <main>
-        <section className="leaderboard">
+      <main className="page leaderboard-page">
+        <section className="leaderboard card">
           <LeaderboardHeader 
             users={users} 
             error={error}

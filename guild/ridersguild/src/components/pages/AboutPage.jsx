@@ -5,7 +5,7 @@ export default function AboutPage() {
     <main className="page about-page">
       <article className="card about-card">
         <header className="about-header">
-          <p className="about-eyebrow">The chronicles</p>
+          <p className="about-eyebrow">Cool header here</p>
           <h1>Lorem Ipsum</h1>
           <span className="about-divider" aria-hidden="true">✦</span>
         </header>
