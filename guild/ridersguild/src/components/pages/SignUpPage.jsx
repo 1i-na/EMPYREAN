@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import SignUp from '../login/SignUp.jsx';
 import Login from '../login/Login.jsx';
-import './SignUpPage.css';
+import './styles/SignUpPage.css';
 
 export default function SignUpPage({ setUser }){
   const [page, setPage] = useState('login');

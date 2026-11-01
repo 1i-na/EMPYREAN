@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import './SignUp.css'
+import './styles/SignUp.css'
 
 const sections = [
   "Scale", "Tail", "Heart", "Flame", "Fang", 
