@@ -6,7 +6,7 @@ import { authLimiter, returnedUser } from "../utils/auth-utils.js";
 const router = Router();
 
 // login
-router.post("/", authLimiter, async (req, res) => {
+router.post("/", authLimiter, async (req, res, next) => {
   const { username, password } = req.body ?? {};
 
   if (typeof username !== "string" || typeof password !== "string") {
@@ -23,12 +23,14 @@ router.post("/", authLimiter, async (req, res) => {
 
   // regenerate session id
   req.session.regenerate((err) => {
-    if (err) {
-      return res.status(500).json({ error: "Could not start session." });
-    }
+    if (err) return next(err);
 
     req.session.userId = user.user_id;
-    return res.json({ user: returnedUser(user) });
+
+    req.session.save(err => {
+      if (err) return next(err);
+      return res.json({ user: returnedUser(user) });
+    });
   });
 });
 

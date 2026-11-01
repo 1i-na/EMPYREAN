@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Profile from "../account/Profile.jsx";
 import Stats from "../account/Stats.jsx";
 import Settings from "../account/Settings.jsx";
 import "../../styles/AccountPage.css";
+import Delete from "../account/Delete.jsx";
 
 export default function AccountPage({ user, setUser }) {
   const [checking, setChecking] = useState(true);
   const [nickname, setNickname] = useState("");
   const [message, setMessage] = useState("");
-  const navigate = useNavigate();
 
   // get logged in user's account
   useEffect(() => {
@@ -62,6 +62,10 @@ export default function AccountPage({ user, setUser }) {
             setUser={setUser} 
           />
         </div>
+
+        <Delete setMessage={setMessage} setUser={setUser} />
+        
+        <p className="account-message" aria-live="polite">{message}</p>
       </section>
     </main>
   );

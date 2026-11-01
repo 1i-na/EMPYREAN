@@ -1,7 +1,11 @@
+import { useNavigate } from "react-router-dom";
+
 export default function Settings({ 
   nickname, setNickname, message, 
   setMessage, setUser 
 }) {
+  const navigate = useNavigate();
+
   // update nickname
   async function updateNickname(e) {
     e.preventDefault();

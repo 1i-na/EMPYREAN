@@ -7,7 +7,7 @@ import { isValidUsername, isValidPassword } from "../utils/validation.js";
 const router = Router();
 
 // signup/create new user account
-router.post("/", authLimiter, async (req, res) => {
+router.post("/", authLimiter, async (req, res, next) => {
   const { username, nickname, password, isRider, section } = req.body ?? {};
   
   if (
@@ -60,21 +60,14 @@ router.post("/", authLimiter, async (req, res) => {
     const userId = Number(result.lastInsertRowid);
 
     // regenerate session id
-    req.session.regenerate((err) => {
-      if (err) {
-        console.error("Could not regenerate signup session:", err);
-        return res.status(500).json({ error: "Account created, but could not start a session." });
-      }
+    req.session.regenerate(err => {
+      if (err) return next(err);
 
       req.session.userId = userId;
 
-      req.session.save((saveErr) => {
-        if (saveErr) {
-          console.error("Could not save signup session:", saveErr);
-          return res.status(500).json({ error: "Account created, but could not start a session." });
-        }
-
-        return res.status(201).json({ user: { user_id: userId } });
+      req.session.save(err => {
+        if (err) return next(err);
+        return res.json({ user: { user_id: userId } });
       });
     });
   } catch (error) {
