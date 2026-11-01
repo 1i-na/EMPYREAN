@@ -1,0 +1,59 @@
+.about-page {
+  width: min(100% - 2rem, 820px);
+  margin-block: clamp(2rem, 7vw, 5rem);
+}
+
+.about-card {
+  position: relative;
+  padding: clamp(1.5rem, 5vw, 3.5rem);
+  overflow: hidden;
+  text-align: left;
+  background:
+    radial-gradient(ellipse at top, rgb(196 164 90 / 11%), transparent 55%),
+    linear-gradient(145deg, #302719, #211b13);
+}
+
+.about-header {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.about-header h1 {
+  margin: 0.3rem 0 0.6rem;
+}
+
+.about-divider {
+  display: block;
+  color: var(--gold);
+  font-size: 1.25rem;
+  letter-spacing: 0.5rem;
+}
+
+.about-copy {
+  max-width: 68ch;
+  margin-inline: auto;
+}
+
+.about-copy p {
+  margin: 0 0 1.4rem;
+  color: var(--text);
+  line-height: 1.85;
+}
+
+.about-footer {
+  margin-top: 2rem;
+  padding-top: 1.25rem;
+  color: var(--gold-light);
+  border-top: 1px solid var(--gold-dim);
+  font-size: 1.1rem;
+  font-style: italic;
+  font-variant: small-caps;
+  letter-spacing: 0.08em;
+  text-align: center;
+}
+
+@media (max-width: 520px) {
+  .about-copy p {
+    line-height: 1.7;
+  }
+}
