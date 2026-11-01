@@ -1,3 +1,44 @@
+.signed-out-page {
+  flex: 1;
+  display: grid;
+  place-items: center;
+  padding-block: 2rem;
+}
+
+.signed-out-card {
+  width: min(100%, 620px);
+  padding: clamp(2rem, 6vw, 3.5rem);
+  text-align: center;
+  background:
+    radial-gradient(ellipse at top, rgb(196 164 90 / 12%), transparent 65%),
+    linear-gradient(145deg, #302719, #211b13);
+  border-color: var(--gold);
+}
+
+.signed-out-card h1 {
+  margin: 0.35rem 0 1rem;
+}
+
+.signed-out-copy {
+  max-width: 38ch;
+  margin: 0 auto 1.75rem;
+  color: var(--text);
+}
+
+.signed-out-link {
+  min-width: 180px;
+  padding: 0.8rem 1.25rem;
+  font-weight: 700;
+  font-variant: small-caps;
+  letter-spacing: 0.05em;
+  box-shadow: 0 4px 12px rgb(0 0 0 / 30%);
+}
+
+.signed-out-link:focus-visible {
+  outline: 2px solid var(--gold-light);
+  outline-offset: 4px;
+}
+
 .account-card {
   text-align: left;
 }

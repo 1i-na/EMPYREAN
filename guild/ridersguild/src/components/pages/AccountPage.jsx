@@ -32,11 +32,12 @@ export default function AccountPage({ user, setUser }) {
 
   if (!user) {
     return (
-      <main className="page">
-        <section className="card">
+      <main className="page signed-out-page">
+        <section className="card signed-out-card">
+          <p className="account-eyebrow">A place awaits you</p>
           <h1>Your account</h1>
-          <p>Log in or create an account to view your profile.</p>
-          <Link className="button-link" to="/login">Log in / Sign up</Link>
+          <p className="signed-out-copy">Log in or create an account to view your profile and continue your journey.</p>
+          <Link className="button-link signout-out-link" to="/login">Log in / Sign up</Link>
         </section>
       </main>
     );
