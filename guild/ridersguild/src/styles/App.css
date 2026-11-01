@@ -1,35 +1,42 @@
-:root {
-  font-family: system-ui, sans-serif;
-  color: #f4f1ff;
-  background: #11101a;
-}
-
-body {
-  margin: 0;
-}
-
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 1rem;
   padding: 1rem max(1.25rem, calc((100% - 1100px) / 2));
-  background: #1b1928;
-  border-bottom: 1px solid #343044;
+  background: linear-gradient(180deg, #302719, #211b13);
+  border-bottom: 2px solid var(--gold-dim);
+  box-shadow: 0 4px 14px rgb(0 0 0 / 35%);
 }
 
-.logo,
-.nav-links a {
-  color: inherit;
+.logo, .nav-links a {
+  color: var(--text-h);
   text-decoration: none;
 }
 
 .logo {
+  color: var(--gold-light);
+  font-size: 1.2rem;
   font-weight: 700;
+  font-variant: small-caps;
+  letter-spacing: 0.08em;
 }
 
 .nav-links {
   display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 1.25rem;
+}
+
+.nav-links a {
+  padding: 0.25rem 0;
+  border-bottom: 1px solid transparent;
+}
+
+.nav-links a:hover {
+  color: var(--gold-light);
+  border-bottom-color: var(--gold);
 }
 
 .page {
@@ -38,39 +45,46 @@ body {
 }
 
 .card {
-  padding: 2rem;
-  background: #1b1928;
-  border: 1px solid #343044;
-  border-radius: 16px;
-  box-shadow: 0 12px 32px #0004;
+  padding: clamp(1.25rem, 4vw, 2rem);
+  color: var(--text);
+  background:
+    linear-gradient(rgb(48 39 25 / 96%), rgb(35 29 21 / 98%));
+  border: 1px solid var(--gold-dim);
+  border-radius: 4px;
+  box-shadow: var(--shadow);
+  outline: 1px solid rgb(196 164 90 / 15%);
+  outline-offset: 4px;
 }
 
-.card input,
-.card button,
-.button-link {
+.card input, .card select, .card button, .button-link {
   font: inherit;
   padding: 0.7rem 0.9rem;
-  border-radius: 8px;
+  border-radius: 4px;
 }
 
-.card input {
-  display: block;
-  width: 100%;
-  box-sizing: border-box;
-  margin: 0.4rem 0 1rem;
+.card input, .card select {
+  color: var(--text-h);
+  background: #19150f;
+  border: 1px solid var(--border);
 }
 
-.card button,
-.button-link {
+.card input:focus, .card select:focus {
+  outline: 2px solid rgb(196 164 90 / 45%);
+  border-color: var(--gold);
+}
+
+.card button, .button-link {
   display: inline-block;
-  color: white;
-  background: #7257d8;
-  border: 0;
+  color: #1c170e;
+  font-weight: 700;
+  background: linear-gradient(#ddc477, #ae8c42);
+  border: 1px solid #ead694;
   text-decoration: none;
   cursor: pointer;
+  transition: filter 150ms ease, transform 150ms ease;
 }
 
-.card button:hover,
-.button-link:hover {
-  background: #896ff0;
+.card button:hover, .button-link:hover {
+  filter: brightness(1.12);
+  transform: translateY(-1px);
 }

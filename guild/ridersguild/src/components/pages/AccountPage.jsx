@@ -91,6 +91,8 @@ export default function AccountPage({ user, setUser }) {
         {user.rider && <p><strong>Section:</strong> {user.section}</p>}
         
         <p><strong>Rank:</strong> {user.rank_title || "Unranked"}</p>
+        <p><strong>Bounties requested:</strong> {user.bounties_requested}</p>
+        <p><strong>Bounties completed:</strong> {user.bounties_completed}</p>
         <p><strong>Total points:</strong> {user.total_points}</p>
 
         <form onSubmit={updateNickname}>
@@ -102,7 +104,7 @@ export default function AccountPage({ user, setUser }) {
             maxLength={80}
             required
           />
-          <button type="submit">Save nickname</button>
+          <button type="submit">Update nickname</button>
         </form>
 
         <p aria-live="polite">{message}</p>

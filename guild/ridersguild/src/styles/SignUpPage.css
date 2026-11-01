@@ -4,47 +4,46 @@
   align-content: center;
   justify-items: center;
   padding: 2rem 1rem;
-  background: #17131d;
+  background:
+    radial-gradient(ellipse at center, rgb(111 77 35 / 20%), transparent 70%),
+    #17140f;
 }
 
 .auth-toggle {
-  width: min(100% - 2rem, 420px);
+  width: min(100%, 420px);
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 0.4rem;
   margin-bottom: 1rem;
   padding: 0.35rem;
-  background: #211b2b;
-  border: 1px solid #62506f;
-  border-radius: 10px;
+  background: #1b1711;
+  border: 1px solid var(--gold-dim);
+  border-radius: 4px;
 }
 
 .auth-toggle button {
   padding: 0.7rem;
-  color: #d9c7eb;
+  color: var(--text);
   background: transparent;
-  border: 0;
-  border-radius: 7px;
+  border: 1px solid transparent;
+  border-radius: 3px;
   font: inherit;
-  font-weight: 600;
+  font-weight: 700;
+  font-variant: small-caps;
   cursor: pointer;
 }
 
 .auth-toggle button.active {
-  color: #211b2b;
-  background: #d4adff;
-}
-
-.auth-toggle button:focus-visible {
-  outline: 2px solid white;
-  outline-offset: 2px;
+  color: #20190e;
+  background: linear-gradient(#ddc477, #ae8c42);
 }
 
 .auth-toggle button:hover:not(.active) {
-  color: #fff;
-  background: #332b3d;
+  color: var(--gold-light);
+  background: #302719;
 }
 
-.auth-toggle button.active:hover {
-  background: #e2c8ff;
+.auth-toggle button:focus-visible {
+  outline: 2px solid var(--gold-light);
+  outline-offset: 3px;
 }

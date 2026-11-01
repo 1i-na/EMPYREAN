@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import './styles/SignUp.css';
+import '../../styles/SignUp.css';
 
 export default function Login({ onSuccess }) {
   const [message, setMessage] = useState('');
